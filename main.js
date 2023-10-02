@@ -1,73 +1,52 @@
-var keyword1 = "Happy";
-var keyword2 = "Gym";
-var keyword3 = "chill";
-
-apiKey = "AIzaSyBsSHP_xADDTemOZHM9PsQvj1KxLhl3fcU"
-clientID = "277809625705-bjiv3i4905koev94kv25gb1tfq4brsqs.apps.googleusercontent.com"
-clientSecret = "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"
-
-var searchText = keyword1 + keyword2 + keyword3 + "music";
-
-function authenticate() {
-  return gapi.auth2.getAuthInstance()
-      .signIn({scope: "https://www.googleapis.com/auth/youtube.force-ssl"})
-      .then(function() { console.log("Sign-in successful"); },
-            function(err) { console.error("Error signing in", err); });
-}
-function loadClient() {
-  gapi.client.setApiKey(apiKey);
-  return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
-      .then(function() { console.log("GAPI client loaded for API"); },
-            function(err) { console.error("Error loading GAPI client for API", err); });
-}
-
-// Make sure the client is loaded and sign-in is complete before calling this method.
-function execute() {
-  return gapi.client.youtube.search.list({
-          "part": [
-        "snippet"
-      ],
-      "maxResults": 15,
-      "order": "rating",
-      "q": searchText
-  }) .then(function(response) {
-    // Handle the results here (response.result has the parsed body).
-    console.log("Response", response);
-    data = response.result.items;
-
-    // Assign first result to video1
-     video1 = data[0].id.videoId;
-
-    // Assign second result to video2
-     video2 = data[1].id.videoId;
-
-    // Assign third result to video3
-     video3 = data[2].id.videoId;
-
-    //  when ready you can continue up to 15 results
-
-
-  },
-  function(err) { console.error("Execute error", err); });
-}
-gapi.load("client:auth2", function() {
-  gapi.auth2.init({client_id: clientID});
-});
-
-
-function search(){
-  authenticate().then(loadClient)
-  // Delaying exeuction by 1 second so authentication can take place
-  setTimeout(execute, 2000)
-}
 
 // This is empty so we can fill it with JS response
 var video1 = ""
 var video2 = ""
 var video3 = ""
 
+
+var apiKey = "AIzaSyBsSHP_xADDTemOZHM9PsQvj1KxLhl3fcU"
+
+// Empty these and fill with your logic as discussed to get the right keywords in search
+var keyword1 = "Happy";
+var keyword2 = "Gym";
+var keyword3 = "chill";
+
+
+
+
+var searchText = keyword1 + "%20" + keyword2 + "%20" + keyword3 + "%20" +  "music";
+
+var url = "https://www.googleapis.com/youtube/v3/search?key=" + apiKey + "&q=" + searchText + "&maxResults=15&order=rating&regionCode=AU&type=video&videoDuration=long&videoEmbeddable=true&part=snippet";
+
+function simpleTest() {
+
+  console.log(url);
+  $(document).ready(function () {
+  $.getJSON(url, function (apiData) {
+
+   console.log("apiData = ", apiData);
+
+   var data = apiData.items;
+  // Assign first result to video1
+     video1 = data[0].id.videoId;
+     console.log("video1 ID = ", video1);
+
+    // Assign second result to video2
+     video2 = data[1].id.videoId;
+     console.log("video2 ID = ", video2);
+
+    // Assign third result to video3
+     video3 = data[2].id.videoId;
+     console.log("video3 ID = ", video3);
+
+    //  when ready you can continue up to 15 results (if you want more then change it in the url where it says "maxResults=15"")
+    })
+  })
+}
+
 // Leave empty so we can fill it later
-var videoID = "VFnl_eVDDAE"
+var videoID = ""
 
 function setVideo1(){
   loadVideo(video1)
@@ -130,6 +109,8 @@ function loadVideo(videoID) {
      player.stopVideo();
    }
 
+
+// Jarryd stuff below here ------------------------
 
 // // Random Location Array
 
