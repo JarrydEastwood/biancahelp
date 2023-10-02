@@ -2,17 +2,9 @@ var keyword1 = "Happy";
 var keyword2 = "Gym";
 var keyword3 = "chill";
 
-jarrydAPI = "AIzaSyBsSHP_xADDTemOZHM9PsQvj1KxLhl3fcU"
-jarrydClientID = "277809625705-bjiv3i4905koev94kv25gb1tfq4brsqs.apps.googleusercontent.com"
-jarrydClientSecret = "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"
-
-
-
-biancaAPI = "AIzaSyDMi3Z7X42PCXgibzG_dQq2iZ6aKVv8kVw"
-biancaClientID = "546688111979-uc6g5rrijkv4ombasavaohc5q5f2bjlj.apps.googleusercontent.com"
-biancaClientSecret = "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m"
-
-
+apiKey = "AIzaSyBsSHP_xADDTemOZHM9PsQvj1KxLhl3fcU"
+clientID = "277809625705-bjiv3i4905koev94kv25gb1tfq4brsqs.apps.googleusercontent.com"
+clientSecret = "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"
 
 var searchText = keyword1 + keyword2 + keyword3 + "music";
 
@@ -23,7 +15,7 @@ function authenticate() {
               function(err) { console.error("Error signing in", err); });
   }
   function loadClient() {
-    gapi.client.setApiKey(biancaAPI);
+    gapi.client.setApiKey(apiKey);
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
         .then(function() { console.log("GAPI client loaded for API"); },
               function(err) { console.error("Error loading GAPI client for API", err); });
@@ -59,7 +51,7 @@ function authenticate() {
               function(err) { console.error("Execute error", err); });
     }
   gapi.load("client:auth2", function() {
-    gapi.auth2.init({client_id: jarrydClientID});
+    gapi.auth2.init({client_id: clientID});
   });
 
 function search(){
