@@ -3,7 +3,11 @@ var keyword2 = "Gym";
 var keyword3 = "chill";
 
 jarrydAPI = "AIzaSyBsSHP_xADDTemOZHM9PsQvj1KxLhl3fcU"
+
 biancaAPI = "AIzaSyDMi3Z7X42PCXgibzG_dQq2iZ6aKVv8kVw"
+biancaClientID = "546688111979-uc6g5rrijkv4ombasavaohc5q5f2bjlj.apps.googleusercontent.com"
+biancaClientSecret = "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m"
+
 
 
 var searchText = keyword1 + keyword2 + keyword3 + "music";
@@ -51,7 +55,7 @@ function authenticate() {
               function(err) { console.error("Execute error", err); });
     }
   gapi.load("client:auth2", function() {
-    gapi.auth2.init({client_id: "https://546688111979-uc6g5rrijkv4ombasavaohc5q5f2bjlj.apps.googleusercontent.com/?fbclid=IwAR2rb2Q7yxIiYvZd2PJckxHgo116Z3JTBo1O9iYLqGVCvrOj7vRpteBQMHI"});
+    gapi.auth2.init({client_id: biancaClientSecret});
   });
 
 function search(){
