@@ -2,6 +2,8 @@ var keyword1 = "Happy";
 var keyword2 = "Gym";
 var keyword3 = "chill";
 
+jarrydAPI = "AIzaSyBsSHP_xADDTemOZHM9PsQvj1KxLhl3fcU"
+biancaAPI = "AIzaSyDMi3Z7X42PCXgibzG_dQq2iZ6aKVv8kVw"
 
 
 var searchText = keyword1 + keyword2 + keyword3 + "music";
@@ -13,7 +15,7 @@ function authenticate() {
               function(err) { console.error("Error signing in", err); });
   }
   function loadClient() {
-    gapi.client.setApiKey("AIzaSyDMi3Z7X42PCXgibzG_dQq2iZ6aKVv8kVw");
+    gapi.client.setApiKey(biancaAPI);
     return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
         .then(function() { console.log("GAPI client loaded for API"); },
               function(err) { console.error("Error loading GAPI client for API", err); });
@@ -49,7 +51,7 @@ function authenticate() {
               function(err) { console.error("Execute error", err); });
     }
   gapi.load("client:auth2", function() {
-    gapi.auth2.init({client_id: "YOUR_CLIENT_ID"});
+    gapi.auth2.init({client_id: "https://546688111979-uc6g5rrijkv4ombasavaohc5q5f2bjlj.apps.googleusercontent.com/?fbclid=IwAR2rb2Q7yxIiYvZd2PJckxHgo116Z3JTBo1O9iYLqGVCvrOj7vRpteBQMHI"});
   });
 
 function search(){
