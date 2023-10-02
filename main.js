@@ -8,58 +8,57 @@ clientSecret = "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"
 
 var searchText = keyword1 + keyword2 + keyword3 + "music";
 
-
 function authenticate() {
-    return gapi.auth2.getAuthInstance()
-        .signIn({scope: "https://www.googleapis.com/auth/youtube.readonly"})
-        .then(function() { console.log("Sign-in successful"); },
-              function(err) { console.error("Error signing in", err); });
-  }
+  return gapi.auth2.getAuthInstance()
+      .signIn({scope: "https://www.googleapis.com/auth/youtube.force-ssl"})
+      .then(function() { console.log("Sign-in successful"); },
+            function(err) { console.error("Error signing in", err); });
+}
+function loadClient() {
+  gapi.client.setApiKey(apiKey);
+  return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
+      .then(function() { console.log("GAPI client loaded for API"); },
+            function(err) { console.error("Error loading GAPI client for API", err); });
+}
 
-  function loadClient() {
-    gapi.client.setApiKey(apiKey);
-    return gapi.client.load("https://www.googleapis.com/discovery/v1/apis/youtube/v3/rest")
-        .then(function() { console.log("GAPI client loaded for API"); },
-              function(err) { console.error("Error loading GAPI client for API", err); });
-  }
-  // Make sure the client is loaded and sign-in is complete before calling this method.
-  function execute() {
-    return gapi.client.youtube.search.list({
-      "part": [
+// Make sure the client is loaded and sign-in is complete before calling this method.
+function execute() {
+  return gapi.client.youtube.search.list({
+          "part": [
         "snippet"
       ],
       "maxResults": 15,
       "order": "rating",
       "q": searchText
-    })
-        .then(function(response) {
-                // Handle the results here (response.result has the parsed body).
-                console.log("Response", response);
-                data = response.result.items;
+  }) .then(function(response) {
+    // Handle the results here (response.result has the parsed body).
+    console.log("Response", response);
+    data = response.result.items;
 
-                // Assign first result to video1
-                 video1 = data[0].id.videoId;
+    // Assign first result to video1
+     video1 = data[0].id.videoId;
 
-                // Assign second result to video2
-                 video2 = data[1].id.videoId;
+    // Assign second result to video2
+     video2 = data[1].id.videoId;
 
-                // Assign third result to video3
-                 video3 = data[2].id.videoId;
+    // Assign third result to video3
+     video3 = data[2].id.videoId;
 
-                //  when ready you can continue up to 15 results
+    //  when ready you can continue up to 15 results
 
 
-              },
-              function(err) { console.error("Execute error", err); });
-    }
-  gapi.load("client:auth2", function() {
-    gapi.auth2.init({client_id: clientID});
-  });
+  },
+  function(err) { console.error("Execute error", err); });
+}
+gapi.load("client:auth2", function() {
+  gapi.auth2.init({client_id: clientID});
+});
+
 
 function search(){
   authenticate().then(loadClient)
   // Delaying exeuction by 1 second so authentication can take place
-  setTimeout(execute, 1000)
+  setTimeout(execute, 2000)
 }
 
 // This is empty so we can fill it with JS response
