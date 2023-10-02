@@ -3,6 +3,10 @@ var keyword2 = "Gym";
 var keyword3 = "chill";
 
 jarrydAPI = "AIzaSyBsSHP_xADDTemOZHM9PsQvj1KxLhl3fcU"
+jarrydClientID = "277809625705-bjiv3i4905koev94kv25gb1tfq4brsqs.apps.googleusercontent.com"
+jarrydClientSecret = "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"
+
+
 
 biancaAPI = "AIzaSyDMi3Z7X42PCXgibzG_dQq2iZ6aKVv8kVw"
 biancaClientID = "546688111979-uc6g5rrijkv4ombasavaohc5q5f2bjlj.apps.googleusercontent.com"
@@ -55,7 +59,7 @@ function authenticate() {
               function(err) { console.error("Execute error", err); });
     }
   gapi.load("client:auth2", function() {
-    gapi.auth2.init({client_id: biancaClientSecret});
+    gapi.auth2.init({client_id: jarrydClientID});
   });
 
 function search(){
